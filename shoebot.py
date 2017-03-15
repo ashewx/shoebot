@@ -16,6 +16,15 @@ def urlGen(model, size):
     URL = 'http://www.adidas.com/us/' + str(model) + '.html?forceSelSize=' + str(model) + '_' + str(ShoeSizeCode)
     return URL
 
-def CheckSizes(url):
+def CheckSizes(url, model):
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-    RawHTML = requests.get(url, )
+    RawHTML = requests.get(url, headers=headers)
+    page = bs4.BeautifulSoup(RawHTML.text,"lxml")
+    ListOfRawSizes = page.select('.size-dropdown-block')
+    Sizes = str(ListOfSizesRaw[0].getText()).replace('\t', '')
+    Sizes = Sizes.replace('\n\n', ' ')
+    Sizes = Sizes.split()
+    Sizes.remove('Select')
+    Sizes.remove('size')
+    for size in Sizes:
+        print(str(model) + ' Sizes: ' + str(size) + ' Available')
