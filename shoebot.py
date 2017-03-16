@@ -21,7 +21,7 @@ def CheckSizes(url, model):
     RawHTML = requests.get(url, headers=headers)
     page = bs4.BeautifulSoup(RawHTML.text,"lxml")
     ListOfRawSizes = page.select('.size-dropdown-block')
-    Sizes = str(ListOfSizesRaw[0].getText()).replace('\t', '')
+    Sizes = str(ListOfRawSizes[0].getText()).replace('\t', '')
     Sizes = Sizes.replace('\n\n', ' ')
     Sizes = Sizes.split()
     Sizes.remove('Select')
