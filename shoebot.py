@@ -28,3 +28,6 @@ def CheckSizes(url, model):
     Sizes.remove('size')
     for size in Sizes:
         print(str(model) + ' Sizes: ' + str(size) + ' Available')
+def Main(model, size):
+    url = urlGen(model, size)
+    CheckSizes(url, model)
